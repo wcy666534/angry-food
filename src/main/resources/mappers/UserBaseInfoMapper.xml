@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.angryfood.dao.UserBaseInfoMapper">
+    <resultMap id="BaseResultMap" type="org.angryfood.domain.UserBaseInfo">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="encrypted_password" property="encryptedPassword"/>
+        <result column="nickname" property="nickname"/>
+        <result column="email_address" property="emailAddress"/>
+        <result column="phone_number" property="phoneNumber"/>
+    </resultMap>
+
+    <insert id="insertUser">
+        INSERT INTO user_base_info
+        (
+         username,
+         encrypted_password,
+         nickname,
+         email_address,
+         phone_number)
+        VALUES
+        (
+         #{username},
+         #{encryptedPassword},
+         #{nickname},
+         #{emailAddress},
+         #{phoneNumber}
+        )
+    </insert>
+
+    <select id="getUsernamePasswordMatchCount" resultType="int">
+        SELECT COUNT(*)
+        FROM user_base_info
+        WHERE username = #{username}
+          AND encrypted_password = #{password}
+    </select>
+
+    <select id="getIdByUsername" resultType="java.lang.Long">
+        SELECT id FROM user_base_info WHERE username = #{username}
+    </select>
+</mapper>
