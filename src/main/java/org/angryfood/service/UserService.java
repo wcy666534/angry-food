@@ -9,4 +9,7 @@ public interface UserService
 {
     ServiceResponse<Boolean> register(UserBaseInfo userBaseInfo);
     ServiceResponse<Long> login(UsernamePassword usernamePassword);
+    ServiceResponse<Boolean> update(UserBaseInfo userBaseInfo);
+    ServiceResponse<Boolean> deleteUser(UserBaseInfo userBaseInfo);
+
 }

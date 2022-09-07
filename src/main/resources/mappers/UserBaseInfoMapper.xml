@@ -38,4 +38,14 @@
     <select id="getIdByUsername" resultType="java.lang.Long">
         SELECT id FROM user_base_info WHERE username = #{username}
     </select>
+    <update id="updateUser"  >
+        update user_base_info set username= #{username},
+            encrypted_password= #{encryptedPassword},
+            nickname=#{nickname},
+            email_address=#{emailAddress},
+            phone_number=#{phoneNumber} where id =#{id}
+    </update>
+    <delete id="deleteUser"  >
+        delete from user_base_info where id =#{id}
+    </delete>
 </mapper>

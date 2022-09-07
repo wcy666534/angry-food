@@ -82,6 +82,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.ibatis/ibatis-core -->
+        <dependency>
+            <groupId>org.apache.ibatis</groupId>
+            <artifactId>ibatis-core</artifactId>
+            <version>3.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -89,6 +95,8 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--加上版本号，与 <parent><groupId>org.springframework.boot</groupId>相同-->
+                <version>2.6.3</version>
                 <configuration>
                     <mainClass>com.xichuan.dev.Application</mainClass>
                     <includeSystemScope>true</includeSystemScope>
@@ -165,10 +173,6 @@
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.7.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.0.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
