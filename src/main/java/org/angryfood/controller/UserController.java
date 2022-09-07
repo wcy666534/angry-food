@@ -35,6 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/delete")
+    //ServiceResponse
     public ServiceResponse<Boolean> delete(@RequestBody UserBaseInfo userBaseInfo) {
         return userService.deleteUser(userBaseInfo);
     }
