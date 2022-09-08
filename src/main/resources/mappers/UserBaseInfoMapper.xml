@@ -48,4 +48,7 @@
     <delete id="deleteUser"  >
         delete from user_base_info where id =#{id}
     </delete>
+    <select id="selectAllStore" resultType="java.lang.String">
+        SELECT storeName FROM store_base_info
+    </select>
 </mapper>

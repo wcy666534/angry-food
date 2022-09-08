@@ -9,6 +9,7 @@ import org.angryfood.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
@@ -95,7 +96,18 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             log.error("Error when executing SQL: ", e);
 
-            return ServiceResponse.buildErrorResponse(1, "Error when delete.");
+            return ServiceResponse.buildErrorResponse(4, "Error when delete.");
         }
     }
-}
+
+    public ServiceResponse<ArrayList<String>> selectAllStore() {
+        try {
+            ArrayList<String> storeList = userBaseInfoMapper.selectAllStore();
+            return ServiceResponse.buildSuccessResponse(storeList);
+        } catch (Exception e) {
+            log.error("Error when executing SQL: ", e);
+
+            return ServiceResponse.buildErrorResponse(5, "Error when selectAllStore.");
+        }
+    }
+    }

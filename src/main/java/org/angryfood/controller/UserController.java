@@ -8,6 +8,8 @@ import org.angryfood.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -34,9 +36,12 @@ public class UserController {
         return userService.update(userBaseInfo);
     }
 
-    @PostMapping("/delete")
-    //ServiceResponse
+    @PostMapping ("/delete")
     public ServiceResponse<Boolean> delete(@RequestBody UserBaseInfo userBaseInfo) {
         return userService.deleteUser(userBaseInfo);
+    }
+    @GetMapping ("/selectAllStore")
+    public ServiceResponse<ArrayList<String>>  selectAllStore(){
+        return userService.selectAllStore();
     }
 }
