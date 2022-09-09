@@ -12,20 +12,16 @@
 
     <insert id="insertUser">
         INSERT INTO user_base_info
-        (
-         username,
+        (username,
          encrypted_password,
          nickname,
          email_address,
          phone_number)
-        VALUES
-        (
-         #{username},
-         #{encryptedPassword},
-         #{nickname},
-         #{emailAddress},
-         #{phoneNumber}
-        )
+        VALUES (#{username},
+                #{encryptedPassword},
+                #{nickname},
+                #{emailAddress},
+                #{phoneNumber})
     </insert>
 
     <select id="getUsernamePasswordMatchCount" resultType="int">
@@ -36,19 +32,75 @@
     </select>
 
     <select id="getIdByUsername" resultType="java.lang.Long">
-        SELECT id FROM user_base_info WHERE username = #{username}
+        SELECT id
+        FROM user_base_info
+        WHERE username = #{username}
     </select>
-    <update id="updateUser"  >
-        update user_base_info set username= #{username},
+    <update id="updateUser">
+        update user_base_info
+        set username= #{username},
             encrypted_password= #{encryptedPassword},
             nickname=#{nickname},
             email_address=#{emailAddress},
-            phone_number=#{phoneNumber} where id =#{id}
+            phone_number=#{phoneNumber}
+        where id = #{id}
     </update>
-    <delete id="deleteUser"  >
-        delete from user_base_info where id =#{id}
+    <delete id="deleteUser">
+        delete
+        from user_base_info
+        where id = #{id}
     </delete>
     <select id="selectAllStore" resultType="java.lang.String">
-        SELECT storeName FROM store_base_info
+        SELECT storeName
+        FROM store_base_info
     </select>
+    <!--这个map存放的是最后查询到的最后结果-->
+    <resultMap id="storeMap" type="org.angryfood.domain.StoreBaseInfo">
+        <id column="sid" property="id" jdbcType="BIGINT"/>
+        <result column="storeName" property="storeName" jdbcType="VARCHAR"/>
+        <result column="storeClass" property="storeClass" jdbcType="VARCHAR"/>
+        <result column="storeAddress" property="storeAddress" jdbcType="VARCHAR"/>
+        <collection property="comboList" ofType="org.angryfood.domain.ComboBaseInfo" column="id"
+                    select="selectComboByStoreId"/>
+    </resultMap>
+    <!--这个Map存放的是通过商店ID查询到的套餐-->
+    <resultMap id="comboMap" type="org.angryfood.domain.ComboBaseInfo">
+        <id column="cid" property="id" jdbcType="INTEGER"/>
+        <result column="comboName" property="comboName" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <collection property="foodList" ofType="org.angryfood.domain.FoodBaseInfo" column="id"
+                    select="selectFoodByStoreId"/>
+    </resultMap>
+    <resultMap id="foodMap" type="org.angryfood.domain.FoodBaseInfo">
+        <id column="fid" property="id" jdbcType="INTEGER"/>
+        <result column="foodName" property="foodName" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectComboByStoreId" resultMap="comboMap">
+        select c.id, c.comboName, c.price, c.count
+        from store_combo sc
+                 left join combo_base_info c
+                           on (sc.comboId = c.id)
+        where sc.storeId = #{storeId}
+    </select>
+    <select id="selectFoodByStoreId" resultMap="foodMap">
+        select f.id, f.foodName, f.count, f.price
+        from /*store_combo sc
+                 left join combo_base_info c
+                           on sc.comboId = c.id*/
+--                  left join
+         combo_food cf
+--                            on c.id = cf.foodId
+                 left join food_base_info f
+                           on cf.foodId = f.id
+        where comboId = #{cid}
+    </select>
+    <select id="selectStoreByStoreId" resultMap="storeMap">
+        select *
+        from store_base_info s
+        where s.id = #{storeId}
+    </select>
+
 </mapper>

@@ -4,20 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * @Author: 作者
- * @Date: 2022/09/08/8:57
+ * @Date: 2022/09/08/19:52
  * @Description: 致敬
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class StoreBaseInfo {
+public class FoodBaseInfo {
     private long id;
-    private String storeName;
-    private String storeClass;
-    private String storeAddress;
-    private List<ComboBaseInfo> comboList;
+    private String foodName;
+    private Integer price;
+    private Integer count;
 }

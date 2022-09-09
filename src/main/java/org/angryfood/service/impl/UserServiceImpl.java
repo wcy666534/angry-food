@@ -2,6 +2,7 @@ package org.angryfood.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.angryfood.dao.UserBaseInfoMapper;
+import org.angryfood.domain.StoreBaseInfo;
 import org.angryfood.domain.UserBaseInfo;
 import org.angryfood.models.ServiceResponse;
 import org.angryfood.models.UsernamePassword;
@@ -110,4 +111,10 @@ public class UserServiceImpl implements UserService {
             return ServiceResponse.buildErrorResponse(5, "Error when selectAllStore.");
         }
     }
+
+    public ServiceResponse<ArrayList<StoreBaseInfo>> selectStoreByStoreId(long storeId) {
+        ArrayList<StoreBaseInfo> storeList =userBaseInfoMapper.selectStoreByStoreId(1);
+        return ServiceResponse.buildSuccessResponse(storeList);
     }
+
+}

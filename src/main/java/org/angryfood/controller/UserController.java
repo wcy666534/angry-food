@@ -1,7 +1,7 @@
 package org.angryfood.controller;
 
+import org.angryfood.domain.StoreBaseInfo;
 import org.angryfood.domain.UserBaseInfo;
-import org.angryfood.models.Id;
 import org.angryfood.models.ServiceResponse;
 import org.angryfood.models.UsernamePassword;
 import org.angryfood.service.UserService;
@@ -36,12 +36,20 @@ public class UserController {
         return userService.update(userBaseInfo);
     }
 
-    @PostMapping ("/delete")
+    @PostMapping("/delete")
     public ServiceResponse<Boolean> delete(@RequestBody UserBaseInfo userBaseInfo) {
         return userService.deleteUser(userBaseInfo);
     }
-    @GetMapping ("/selectAllStore")
-    public ServiceResponse<ArrayList<String>>  selectAllStore(){
+
+    @GetMapping("/selectAllStore")
+    public ServiceResponse<ArrayList<String>> selectAllStore() {
         return userService.selectAllStore();
+
+    }
+
+    @GetMapping("/selectStoreByStoreId")
+    public ServiceResponse<ArrayList<StoreBaseInfo>> selectStoreByStoreId() {
+        //先用1代替吧
+        return userService.selectStoreByStoreId(1);
     }
 }
