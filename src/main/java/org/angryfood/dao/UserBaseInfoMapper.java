@@ -27,7 +27,8 @@ public interface UserBaseInfoMapper
     int updateComboCount(long comboId, int comboNumber);
     int insertComment(long orderId,String comment,Date commentTime);
     int insertStore(StoreBaseInfo store);
-    int insertFood(long storeId,FoodBaseInfo food);
+    int insertFood(String foodName,int price,int count);
+    int insertStore_food(long storeId,String foodName);
     int updateCombo(long storeId,ComboBaseInfo combo);
     ArrayList<FoodBaseInfo> selectAllFoodByStoreId(long storeId);
     int insertAddress(AddressBaseInfo address);

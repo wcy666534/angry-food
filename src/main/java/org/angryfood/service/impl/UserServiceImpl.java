@@ -146,7 +146,9 @@ public class UserServiceImpl implements UserService {
         }
     }
     public ServiceResponse<Boolean> insertFood(long storeId, FoodBaseInfo food){
-        int successCount= userBaseInfoMapper.insertFood(storeId,food);
+
+        int successCount= userBaseInfoMapper.insertFood(food.getFoodName(),food.getPrice(),food.getCount());
+        userBaseInfoMapper.insertStore_food(storeId,food.getFoodName());
         if (successCount > 0) {
             return ServiceResponse.buildSuccessResponse(true);
         } else {

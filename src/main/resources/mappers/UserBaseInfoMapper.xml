@@ -147,9 +147,11 @@ combo_food cf
         VALUES (#{foodName},
                 #{price},
                 #{count})
-        INSERT INTO food_base_info
-        ( storeId,
-          foodId)
+    </insert>
+    <insert id="insertStore_food">
+        INSERT INTO store_food
+        (storeId,
+        foodId)
         VALUES (#{storeId},(select id from food_base_info where foodName=#{foodName})
     </insert>
     <update id="updateCombo">
