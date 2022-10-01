@@ -116,5 +116,11 @@ public class UserServiceImpl implements UserService {
         ArrayList<StoreBaseInfo> storeList =userBaseInfoMapper.selectStoreByStoreId(1);
         return ServiceResponse.buildSuccessResponse(storeList);
     }
+    public ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId){
+        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertOrder(userId, storeId, comboId));
+    }
+    public ServiceResponse<Boolean> insertComment(long orderId,String comment){
+        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertComment(orderId,comment));
+    }
 
 }

@@ -15,4 +15,6 @@ public interface UserService
     ServiceResponse<Boolean> deleteUser(UserBaseInfo userBaseInfo);
     ServiceResponse<ArrayList<String>> selectAllStore();
     ServiceResponse<ArrayList<StoreBaseInfo>> selectStoreByStoreId(long storeId);
+    ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId);
+    ServiceResponse<Boolean> insertComment(long orderId,String comment);
 }

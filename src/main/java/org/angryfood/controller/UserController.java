@@ -52,4 +52,12 @@ public class UserController {
         //先用1代替吧
         return userService.selectStoreByStoreId(1);
     }
+    @PostMapping("/insertOrder")
+    public ServiceResponse<Boolean> insertOrder(@RequestBody long userId,long storeId,long comboId){
+        return userService.insertOrder(userId, storeId,comboId);
+    }
+    @PostMapping("/insertComment")
+    public ServiceResponse<Boolean> insertComment(@RequestBody long orderId,String comment){
+        return userService.insertComment( orderId, comment);
+    }
 }

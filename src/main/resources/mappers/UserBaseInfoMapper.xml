@@ -91,10 +91,10 @@
                  left join combo_base_info c
                            on sc.comboId = c.id*/
 --                  left join
-         combo_food cf
+combo_food cf
 --                            on c.id = cf.foodId
-                 left join food_base_info f
-                           on cf.foodId = f.id
+    left join food_base_info f
+              on cf.foodId = f.id
         where comboId = #{cid}
     </select>
     <select id="selectStoreByStoreId" resultMap="storeMap">
@@ -102,5 +102,42 @@
         from store_base_info s
         where s.id = #{storeId}
     </select>
+    <insert id="insertOrder">
+        Double price=(select price
+        from combo_base_info c
+        where c.id=
+        #{comboId}
+        )
+        Long
+        orderTime
+        =
+        date
+        .
+        getTime
+        (
+        );
+        INSERT INTO order_base_info
+        (userId,
+         storeId,
+         comboId,
+         price,
+         orderTime)
+        VALUES (#{userId},
+                #{storeId},
+                #{comboId},
+                price,
+                orderTime)
+    </insert>
+    <insert id="insertComment">
+        Long
+        commentTime=date.getTime();
+        INSERT INTO comment_base_info
+        (orderId,
+         comment,
+         commentTime)
+        VALUES (#{orderId},
+                #{comment},
+                commentTime)
+    </insert>
 
 </mapper>
