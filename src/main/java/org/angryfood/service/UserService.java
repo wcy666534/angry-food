@@ -1,5 +1,6 @@
 package org.angryfood.service;
 
+import org.angryfood.domain.FoodBaseInfo;
 import org.angryfood.domain.StoreBaseInfo;
 import org.angryfood.domain.UserBaseInfo;
 import org.angryfood.models.ServiceResponse;
@@ -15,8 +16,9 @@ public interface UserService
     ServiceResponse<Boolean> deleteUser(UserBaseInfo userBaseInfo);
     ServiceResponse<ArrayList<String>> selectAllStore();
     ServiceResponse<ArrayList<StoreBaseInfo>> selectStoreByStoreId(long storeId);
-    ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId);
+    ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId,long comboNumber);
     ServiceResponse<Boolean> insertComment(long orderId,String comment);
     ServiceResponse<Boolean> insertStore(StoreBaseInfo store);
+    ServiceResponse<Boolean> insertFood(long storeId, FoodBaseInfo food);
 
 }

@@ -2,6 +2,7 @@ package org.angryfood.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.angryfood.dao.UserBaseInfoMapper;
+import org.angryfood.domain.FoodBaseInfo;
 import org.angryfood.domain.StoreBaseInfo;
 import org.angryfood.domain.UserBaseInfo;
 import org.angryfood.models.ServiceResponse;
@@ -116,8 +117,8 @@ public class UserServiceImpl implements UserService {
         ArrayList<StoreBaseInfo> storeList =userBaseInfoMapper.selectStoreByStoreId(1);
         return ServiceResponse.buildSuccessResponse(storeList);
     }
-    public ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId){
-        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertOrder(userId, storeId, comboId));
+    public ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId,long comboNumber){
+        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertOrder(userId, storeId, comboId,comboNumber));
     }
     public ServiceResponse<Boolean> insertComment(long orderId,String comment){
         return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertComment(orderId,comment));
@@ -125,6 +126,10 @@ public class UserServiceImpl implements UserService {
     public ServiceResponse<Boolean> insertStore(StoreBaseInfo store){
         return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertStore(store));
     }
+    public ServiceResponse<Boolean> insertFood(long storeId, FoodBaseInfo food){
+        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertFood(storeId,food));
+    }
+
 
 
 }

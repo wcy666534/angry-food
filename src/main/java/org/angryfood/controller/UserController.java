@@ -1,5 +1,6 @@
 package org.angryfood.controller;
 
+import org.angryfood.domain.FoodBaseInfo;
 import org.angryfood.domain.StoreBaseInfo;
 import org.angryfood.domain.UserBaseInfo;
 import org.angryfood.models.ServiceResponse;
@@ -53,8 +54,8 @@ public class UserController {
         return userService.selectStoreByStoreId(1);
     }
     @PostMapping("/insertOrder")
-    public ServiceResponse<Boolean> insertOrder(@RequestBody long userId,long storeId,long comboId){
-        return userService.insertOrder(userId, storeId,comboId);
+    public ServiceResponse<Boolean> insertOrder(@RequestBody long userId,long storeId,long comboId,long comboNumber){
+        return userService.insertOrder(userId, storeId,comboId,comboNumber);
     }
     @PostMapping("/insertComment")
     public ServiceResponse<Boolean> insertComment(@RequestBody long orderId,String comment){
@@ -64,4 +65,9 @@ public class UserController {
     public ServiceResponse<Boolean>  insertStore(StoreBaseInfo store){
         return userService.insertStore(store);
     }
+    @PostMapping("/insertFood")
+    public ServiceResponse<Boolean>   insertFood(long storeId, FoodBaseInfo food){
+        return userService.insertFood(storeId, food);
+    }
+    
 }

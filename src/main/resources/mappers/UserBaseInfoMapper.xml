@@ -107,7 +107,7 @@ combo_food cf
         from combo_base_info c
         where c.id=
         #{comboId}
-        )
+        )*#{comboNumber}
         Long
         orderTime
         =
@@ -121,12 +121,16 @@ combo_food cf
          storeId,
          comboId,
          price,
-         orderTime)
+         orderTime,
+         comboNumber)
         VALUES (#{userId},
                 #{storeId},
                 #{comboId},
                 price,
-                orderTime)
+                orderTime
+                #{comboNumber})
+        update combo_base_info
+        set count= (select count from combo_base_info where id = #{id})-#{comboNumber}
     </insert>
     <insert id="insertComment">
         Long
@@ -147,6 +151,19 @@ combo_food cf
         VALUES (#{storeName},
                 #{storeClass},
                 #{storeAddress})
+    </insert>
+    <insert id="insertFood">
+        INSERT INTO food_base_info
+        ( foodName,
+          price,
+          count)
+        VALUES (#{foodName},
+                #{price},
+                #{count})
+         INSERT INTO food_base_info
+        ( storeId,
+          foodId)
+        VALUES (#{storeId},(select id from food_base_info where foodName=#{foodName})
     </insert>
 
 </mapper>
