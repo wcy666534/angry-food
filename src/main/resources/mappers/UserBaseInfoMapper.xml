@@ -139,5 +139,14 @@ combo_food cf
                 #{comment},
                 commentTime)
     </insert>
+    <insert id="insertStore">
+        INSERT INTO store_base_info
+        ( storeName,
+         storeClass,
+    storeAddress)
+        VALUES (#{storeName},
+                #{storeClass},
+                #{storeAddress})
+    </insert>
 
 </mapper>

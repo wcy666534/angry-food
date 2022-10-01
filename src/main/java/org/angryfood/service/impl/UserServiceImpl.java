@@ -122,5 +122,9 @@ public class UserServiceImpl implements UserService {
     public ServiceResponse<Boolean> insertComment(long orderId,String comment){
         return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertComment(orderId,comment));
     }
+    public ServiceResponse<Boolean> insertStore(StoreBaseInfo store){
+        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertStore(store));
+    }
+
 
 }

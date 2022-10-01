@@ -60,4 +60,8 @@ public class UserController {
     public ServiceResponse<Boolean> insertComment(@RequestBody long orderId,String comment){
         return userService.insertComment( orderId, comment);
     }
+    @PostMapping("/insertStore")
+    public ServiceResponse<Boolean>  insertStore(StoreBaseInfo store){
+        return userService.insertStore(store);
+    }
 }

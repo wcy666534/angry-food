@@ -17,4 +17,6 @@ public interface UserService
     ServiceResponse<ArrayList<StoreBaseInfo>> selectStoreByStoreId(long storeId);
     ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId);
     ServiceResponse<Boolean> insertComment(long orderId,String comment);
+    ServiceResponse<Boolean> insertStore(StoreBaseInfo store);
+
 }
