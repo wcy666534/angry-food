@@ -83,6 +83,6 @@ public class UserController {
 
     @PostMapping("/insertTakeAwayOrder")
     public ServiceResponse<Boolean> insertTakeAwayOrder(long id,long userId, long storeId, HashMap<Long, Integer> foodInformMap){
-        return userService.insertTakeAwayOrder( id, userId, storeId,  foodInformMap);
+        return userService.insertTakeAwayOrder( id, userId, storeId, foodInformMap);
     }
 }

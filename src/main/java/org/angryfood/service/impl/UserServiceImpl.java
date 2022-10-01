@@ -118,8 +118,9 @@ public class UserServiceImpl implements UserService {
         return ServiceResponse.buildSuccessResponse(storeList);
     }
     public ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId,long comboNumber){
-
-        int successCount= userBaseInfoMapper.insertOrder(userId, storeId, comboId,comboNumber);
+        Date date=new Date();
+        int successCount= userBaseInfoMapper.insertOrder(userId, storeId, comboId,comboNumber, date);
+        userBaseInfoMapper.updateComboCount(comboId, (int) comboNumber);
         if (successCount > 0) {
             return ServiceResponse.buildSuccessResponse(true);
         } else {
@@ -127,7 +128,8 @@ public class UserServiceImpl implements UserService {
         }
     }
     public ServiceResponse<Boolean> insertComment(long orderId,String comment){
-        int successCount= userBaseInfoMapper.insertComment(orderId,comment);
+        Date date=new Date();
+        int successCount= userBaseInfoMapper.insertComment(orderId,comment,date);
         if (successCount > 0) {
             return ServiceResponse.buildSuccessResponse(true);
         } else {

@@ -103,8 +103,6 @@ combo_food cf
         where s.id = #{storeId}
     </select>
     <insert id="insertOrder">
-        Double price=(select price from combo_base_info c where c.id= #{comboId})*(#{comboNumber})
-        Long orderTime =date.getTime();
         INSERT INTO order_base_info
         (userId,
          storeId,
@@ -115,22 +113,22 @@ combo_food cf
         VALUES (#{userId},
                 #{storeId},
                 #{comboId},
-                price,
-                orderTime
+                (select price from combo_base_info c where c.id= #{comboId})*(#{comboNumber}),
+                #{orderTime},
                 #{comboNumber})
+    </insert>
+    <update id="updateComboCount">
         update combo_base_info
         set count= (select count from combo_base_info where id = #{id})-#{comboNumber}
-    </insert>
+    </update>
     <insert id="insertComment">
-        Long
-        commentTime=date.getTime();
         INSERT INTO comment_base_info
         (orderId,
          comment,
          commentTime)
         VALUES (#{orderId},
                 #{comment},
-                commentTime)
+                #{commentTime})
     </insert>
     <insert id="insertStore">
         INSERT INTO store_base_info
