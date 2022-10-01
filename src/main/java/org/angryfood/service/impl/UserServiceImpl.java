@@ -2,6 +2,7 @@ package org.angryfood.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.angryfood.dao.UserBaseInfoMapper;
+import org.angryfood.domain.ComboBaseInfo;
 import org.angryfood.domain.FoodBaseInfo;
 import org.angryfood.domain.StoreBaseInfo;
 import org.angryfood.domain.UserBaseInfo;
@@ -118,18 +119,46 @@ public class UserServiceImpl implements UserService {
         return ServiceResponse.buildSuccessResponse(storeList);
     }
     public ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId,long comboNumber){
-        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertOrder(userId, storeId, comboId,comboNumber));
+
+        int successCount= userBaseInfoMapper.insertOrder(userId, storeId, comboId,comboNumber);
+        if (successCount > 0) {
+            return ServiceResponse.buildSuccessResponse(true);
+        } else {
+            return ServiceResponse.buildErrorResponse(6,"Error when insertOrder.");
+        }
     }
     public ServiceResponse<Boolean> insertComment(long orderId,String comment){
-        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertComment(orderId,comment));
+        int successCount= userBaseInfoMapper.insertComment(orderId,comment);
+        if (successCount > 0) {
+            return ServiceResponse.buildSuccessResponse(true);
+        } else {
+            return ServiceResponse.buildErrorResponse(7,"Error when insertComment.");
+        }
+
     }
     public ServiceResponse<Boolean> insertStore(StoreBaseInfo store){
-        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertStore(store));
+        int successCount= userBaseInfoMapper.insertStore(store);
+        if (successCount > 0) {
+            return ServiceResponse.buildSuccessResponse(true);
+        } else {
+            return ServiceResponse.buildErrorResponse(8,"insertStore");
+        }
     }
     public ServiceResponse<Boolean> insertFood(long storeId, FoodBaseInfo food){
-        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.insertFood(storeId,food));
+        int successCount= userBaseInfoMapper.insertFood(storeId,food);
+        if (successCount > 0) {
+            return ServiceResponse.buildSuccessResponse(true);
+        } else {
+            return ServiceResponse.buildErrorResponse(9,"insertFood");
+        }
     }
-
-
+    public ServiceResponse<Boolean> updateCombo(long storeId,ComboBaseInfo combo){
+        int successCount= userBaseInfoMapper.updateCombo(storeId,combo);
+        if (successCount > 0) {
+            return ServiceResponse.buildSuccessResponse(true);
+        } else {
+            return ServiceResponse.buildErrorResponse(10,"updateCombo");
+        }
+    }
 
 }

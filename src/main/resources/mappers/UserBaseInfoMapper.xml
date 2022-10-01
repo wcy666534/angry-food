@@ -160,10 +160,22 @@ combo_food cf
         VALUES (#{foodName},
                 #{price},
                 #{count})
-         INSERT INTO food_base_info
+        INSERT INTO food_base_info
         ( storeId,
           foodId)
         VALUES (#{storeId},(select id from food_base_info where foodName=#{foodName})
     </insert>
-
+    <update id="updateCombo">
+        update combo_base_info
+        set comboName= #{comboName},
+            price= #{price},
+            count=#{count}
+        where id = #{id}
+        delete  from combo_food  where id = #{id}
+        for(FoodBaseInfo food:#{foodList}){
+        INSERT INTO combo_food ( comboId,
+                                 foodId)
+        VALUES (#{storeId},food.getId())
+        }
+    </update>
 </mapper>

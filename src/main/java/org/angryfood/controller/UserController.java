@@ -1,5 +1,6 @@
 package org.angryfood.controller;
 
+import org.angryfood.domain.ComboBaseInfo;
 import org.angryfood.domain.FoodBaseInfo;
 import org.angryfood.domain.StoreBaseInfo;
 import org.angryfood.domain.UserBaseInfo;
@@ -69,5 +70,9 @@ public class UserController {
     public ServiceResponse<Boolean>   insertFood(long storeId, FoodBaseInfo food){
         return userService.insertFood(storeId, food);
     }
-    
+    @PostMapping("/updateCombo")
+    public ServiceResponse<Boolean>   updateCombo(long storeId, ComboBaseInfo combo){
+        return userService.updateCombo(storeId,combo);
+    }
+
 }

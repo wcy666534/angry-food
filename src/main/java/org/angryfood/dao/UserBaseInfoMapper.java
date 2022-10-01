@@ -24,11 +24,9 @@ public interface UserBaseInfoMapper
     ArrayList<StoreBaseInfo> selectStoreByStoreId(long storeId);
     ArrayList<ComboBaseInfo> selectComboByStoreId(long storeId);
     ArrayList<FoodBaseInfo> selectFoodByStoreId(long storeId);
-    Boolean insertOrder(long userId,long storeId,long comboId,long comboNumber);
-    Boolean insertComment(long orderId,String comment);
-    Boolean insertStore(StoreBaseInfo store);
-    Boolean insertFood(long storeId,FoodBaseInfo food);
-
-
-
+    int insertOrder(long userId,long storeId,long comboId,long comboNumber);
+    int insertComment(long orderId,String comment);
+    int insertStore(StoreBaseInfo store);
+    int insertFood(long storeId,FoodBaseInfo food);
+    int updateCombo(long storeId,ComboBaseInfo combo);
 }

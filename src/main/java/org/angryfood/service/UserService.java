@@ -1,5 +1,6 @@
 package org.angryfood.service;
 
+import org.angryfood.domain.ComboBaseInfo;
 import org.angryfood.domain.FoodBaseInfo;
 import org.angryfood.domain.StoreBaseInfo;
 import org.angryfood.domain.UserBaseInfo;
@@ -20,5 +21,7 @@ public interface UserService
     ServiceResponse<Boolean> insertComment(long orderId,String comment);
     ServiceResponse<Boolean> insertStore(StoreBaseInfo store);
     ServiceResponse<Boolean> insertFood(long storeId, FoodBaseInfo food);
+    ServiceResponse<Boolean> updateCombo(long storeId,ComboBaseInfo combo);
+
 
 }
