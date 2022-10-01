@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/user")
@@ -78,5 +79,10 @@ public class UserController {
     @PostMapping("/insertAddress")
     public ServiceResponse<Boolean> insertAddress(AddressBaseInfo address){
         return userService.insertAddress(address);
+    }
+
+    @PostMapping("/insertTakeAwayOrder")
+    public ServiceResponse<Boolean> insertTakeAwayOrder(long id,long userId, long storeId, HashMap<Long, Integer> foodInformMap){
+        return userService.insertTakeAwayOrder( id, userId, storeId,  foodInformMap);
     }
 }

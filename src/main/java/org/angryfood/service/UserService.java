@@ -5,6 +5,7 @@ import org.angryfood.models.ServiceResponse;
 import org.angryfood.models.UsernamePassword;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface UserService
 {
@@ -21,6 +22,7 @@ public interface UserService
     ServiceResponse<Boolean> updateCombo(long storeId,ComboBaseInfo combo);
     ServiceResponse<ArrayList<FoodBaseInfo>> selectAllFoodByStoreId(long storeId);
     ServiceResponse<Boolean> insertAddress(AddressBaseInfo address);
+    ServiceResponse<Boolean>  insertTakeAwayOrder(long id,long userId, long storeId, HashMap<Long, Integer> foodInformMap);
 
 
 }

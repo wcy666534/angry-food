@@ -7,7 +7,9 @@ import org.apache.catalina.Store;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public interface UserBaseInfoMapper
@@ -28,6 +30,9 @@ public interface UserBaseInfoMapper
     int updateCombo(long storeId,ComboBaseInfo combo);
     ArrayList<FoodBaseInfo> selectAllFoodByStoreId(long storeId);
     int insertAddress(AddressBaseInfo address);
-
+    int getPriceByFoodId(long foodId);
+    int insertTakeAwayOrder(long id, long userId, long storeId, Double sumPrice, Date date);
+    int insertTakeAwayOrder_Food(long takeawayorderId,long foodId,long storeId,int foodNumber);
+    int updateFood(long foodId,int foodNumber);
 
 }

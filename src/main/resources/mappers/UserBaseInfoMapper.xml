@@ -136,7 +136,7 @@ combo_food cf
         INSERT INTO store_base_info
         ( storeName,
          storeClass,
-    storeAddress)
+         storeAddress)
         VALUES (#{storeName},
                 #{storeClass},
                 #{storeAddress})
@@ -186,6 +186,44 @@ combo_food cf
         VALUES (#{addressId},
                 #{address},
                 #{userId})
+    </insert >
+    <insert id="insertTakeAwayOrder">
+        INSERT INTO takeawayorder_base_info
+        ( id,
+          userId,
+          storeId,
+          address,
+          sumPrice,
+          orderTime)
+        VALUES (#{id},
+                #{userId},
+                #{storeId},
+                #{address},
+                #{sumPrice},
+                #{orderTime}
+                )
     </insert>
+    <select id="getPriceByFoodId" resultType="java.lang.Integer">
+        SELECT price
+        FROM food_base_info
+        WHERE id = #{foodId}
+    </select>
+    <insert id="insertTakeAwayOrder_Food">
+        INSERT INTO takeawayorder_food
+        ( takeawayorderId,
+          foodId,
+          storeId,
+          foodNumber)
+        VALUES (#{takeawayorderId},
+                #{foodId},
+                #{storeId},
+                #{foodNumber}
+               )
+    </insert>
+    <update id="updateFood">
+        update food_base_info
+        set count= (select count from food_base_info where id=#{foodId})-#{foodNumber}
+        where id = #{foodId}
+    </update>
 
 </mapper>

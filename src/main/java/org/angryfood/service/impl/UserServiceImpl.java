@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -168,5 +170,24 @@ public class UserServiceImpl implements UserService {
             return ServiceResponse.buildErrorResponse(11,"insertAddress");
         }
     }
-
+    public ServiceResponse<Boolean> insertTakeAwayOrder(long id,long userId, long storeId, HashMap<Long, Integer> foodInformMap){
+        int sumPrice=0;
+        for (Map.Entry<Long, Integer> entry : foodInformMap.entrySet()) {
+            int price=userBaseInfoMapper.getPriceByFoodId(entry.getKey())* entry.getValue();
+            sumPrice+=price;
+        }
+        Date date = new Date();
+        int successCount=userBaseInfoMapper.insertTakeAwayOrder(id,userId,storeId,Double.valueOf(sumPrice),date);
+        for (Map.Entry<Long, Integer> entry : foodInformMap.entrySet()) {
+            userBaseInfoMapper.insertTakeAwayOrder_Food(id,entry.getKey(),storeId,entry.getValue());
+        }
+        for (Map.Entry<Long, Integer> entry : foodInformMap.entrySet()) {
+            userBaseInfoMapper.updateFood(entry.getKey(),entry.getValue());
+        }
+        if (successCount > 0) {
+            return ServiceResponse.buildSuccessResponse(true);
+        } else {
+            return ServiceResponse.buildErrorResponse(11,"insertAddress");
+        }
+    }
 }
