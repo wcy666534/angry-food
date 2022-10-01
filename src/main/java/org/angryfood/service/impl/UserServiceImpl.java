@@ -2,10 +2,7 @@ package org.angryfood.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.angryfood.dao.UserBaseInfoMapper;
-import org.angryfood.domain.ComboBaseInfo;
-import org.angryfood.domain.FoodBaseInfo;
-import org.angryfood.domain.StoreBaseInfo;
-import org.angryfood.domain.UserBaseInfo;
+import org.angryfood.domain.*;
 import org.angryfood.models.ServiceResponse;
 import org.angryfood.models.UsernamePassword;
 import org.angryfood.service.UserService;
@@ -163,6 +160,13 @@ public class UserServiceImpl implements UserService {
     public ServiceResponse<ArrayList<FoodBaseInfo>> selectAllFoodByStoreId(long storeId){
         return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.selectAllFoodByStoreId(storeId));
     }
-
+    public ServiceResponse<Boolean> insertAddress(AddressBaseInfo address){
+        int successCount= userBaseInfoMapper.insertAddress(address);
+        if (successCount > 0) {
+            return ServiceResponse.buildSuccessResponse(true);
+        } else {
+            return ServiceResponse.buildErrorResponse(11,"insertAddress");
+        }
+    }
 
 }

@@ -1,9 +1,6 @@
 package org.angryfood.service;
 
-import org.angryfood.domain.ComboBaseInfo;
-import org.angryfood.domain.FoodBaseInfo;
-import org.angryfood.domain.StoreBaseInfo;
-import org.angryfood.domain.UserBaseInfo;
+import org.angryfood.domain.*;
 import org.angryfood.models.ServiceResponse;
 import org.angryfood.models.UsernamePassword;
 
@@ -23,7 +20,7 @@ public interface UserService
     ServiceResponse<Boolean> insertFood(long storeId, FoodBaseInfo food);
     ServiceResponse<Boolean> updateCombo(long storeId,ComboBaseInfo combo);
     ServiceResponse<ArrayList<FoodBaseInfo>> selectAllFoodByStoreId(long storeId);
-
+    ServiceResponse<Boolean> insertAddress(AddressBaseInfo address);
 
 
 }

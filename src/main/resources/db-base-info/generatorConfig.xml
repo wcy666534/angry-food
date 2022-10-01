@@ -222,7 +222,7 @@
                 DB2_MF    :相当于selectKey的SQL为：SELECT IDENTITY_VAL_LOCAL() FROM SYSIBM.SYSDUMMY1
                 Derby      :相当于selectKey的SQL为：VALUES IDENTITY_VAL_LOCAL()
                 HSQLDB      :相当于selectKey的SQL为：CALL IDENTITY()
-                Informix  :相当于selectKey的SQL为：select dbinfo('sqlca.sqlerrd1') from systables where tabid=1
+                Informix  :相当于selectKey的SQL为：select dbinfo('sqlcaaddress_base_info.sqlerrd1') from systables where tabid=1
                 MySql      :相当于selectKey的SQL为：SELECT LAST_INSERT_ID()
                 SqlServer :相当于selectKey的SQL为：SELECT SCOPE_IDENTITY()
                 SYBASE      :相当于selectKey的SQL为：SELECT @@IDENTITY

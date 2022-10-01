@@ -1,9 +1,6 @@
 package org.angryfood.dao;
 
-import org.angryfood.domain.ComboBaseInfo;
-import org.angryfood.domain.FoodBaseInfo;
-import org.angryfood.domain.StoreBaseInfo;
-import org.angryfood.domain.UserBaseInfo;
+import org.angryfood.domain.*;
 import org.angryfood.models.ServiceResponse;
 import org.angryfood.models.UsernamePassword;
 import org.apache.catalina.Store;
@@ -30,5 +27,7 @@ public interface UserBaseInfoMapper
     int insertFood(long storeId,FoodBaseInfo food);
     int updateCombo(long storeId,ComboBaseInfo combo);
     ArrayList<FoodBaseInfo> selectAllFoodByStoreId(long storeId);
+    int insertAddress(AddressBaseInfo address);
+
 
 }

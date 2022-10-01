@@ -1,9 +1,6 @@
 package org.angryfood.controller;
 
-import org.angryfood.domain.ComboBaseInfo;
-import org.angryfood.domain.FoodBaseInfo;
-import org.angryfood.domain.StoreBaseInfo;
-import org.angryfood.domain.UserBaseInfo;
+import org.angryfood.domain.*;
 import org.angryfood.models.ServiceResponse;
 import org.angryfood.models.UsernamePassword;
 import org.angryfood.service.UserService;
@@ -78,6 +75,8 @@ public class UserController {
     public ServiceResponse<ArrayList<FoodBaseInfo>> selectAllFoodByStoreId(long storeId){
         return userService.selectAllFoodByStoreId(storeId);
     }
-  
-
+    @PostMapping("/insertAddress")
+    public ServiceResponse<Boolean> insertAddress(AddressBaseInfo address){
+        return userService.insertAddress(address);
+    }
 }

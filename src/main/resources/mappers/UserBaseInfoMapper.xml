@@ -178,6 +178,14 @@ combo_food cf
         from food_base_info f
         where f.id in (select foodId from store_food where storeId=#{storeId})
     </select>
-
+    <insert id="insertAddress">
+        INSERT INTO address_base_info
+        ( addressId,
+          address,
+          userId)
+        VALUES (#{addressId},
+                #{address},
+                #{userId})
+    </insert>
 
 </mapper>
