@@ -156,7 +156,11 @@ public class UserServiceImpl implements UserService {
         }
     }
     public ServiceResponse<Boolean> updateCombo(long storeId,ComboBaseInfo combo){
-        int successCount= userBaseInfoMapper.updateCombo(storeId,combo);
+        int successCount= userBaseInfoMapper. updateCombo(combo.getId(),combo.getComboName(),combo.getPrice(),combo.getCount());
+        userBaseInfoMapper.deleteCombo_food(combo.getId());
+        for(FoodBaseInfo food: combo.getFoodList()){
+            userBaseInfoMapper.insertCombo_food(combo.getId(), food.getId());
+        }
         if (successCount > 0) {
             return ServiceResponse.buildSuccessResponse(true);
         } else {

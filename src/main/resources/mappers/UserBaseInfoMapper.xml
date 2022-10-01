@@ -160,13 +160,15 @@ combo_food cf
             price= #{price},
             count=#{count}
         where id = #{id}
-        delete  from combo_food  where id = #{id}
-        for(FoodBaseInfo food:#{foodList}){
+    </update>
+    <delete id="deleteCombo_food">
+        delete  from combo_food  where comboId = #{id}
+    </delete>
+    <insert id="insertCombo_food">
         INSERT INTO combo_food ( comboId,
                                  foodId)
-        VALUES (#{storeId},food.getId())
-        }
-    </update>
+        VALUES (#{storeId},#{foodId})
+    </insert >
     <resultMap id="foodMapByStoreId" type="org.angryfood.domain.FoodBaseInfo">
         <id column="id" property="id"/>
         <result column="foodName" property="foodName"/>
