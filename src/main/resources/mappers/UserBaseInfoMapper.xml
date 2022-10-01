@@ -103,19 +103,8 @@ combo_food cf
         where s.id = #{storeId}
     </select>
     <insert id="insertOrder">
-        Double price=(select price
-        from combo_base_info c
-        where c.id=
-        #{comboId}
-        )*#{comboNumber}
-        Long
-        orderTime
-        =
-        date
-        .
-        getTime
-        (
-        );
+        Double price=(select price from combo_base_info c where c.id= #{comboId})*(#{comboNumber})
+        Long orderTime =date.getTime();
         INSERT INTO order_base_info
         (userId,
          storeId,
@@ -178,4 +167,17 @@ combo_food cf
         VALUES (#{storeId},food.getId())
         }
     </update>
+    <resultMap id="foodMapByStoreId" type="org.angryfood.domain.FoodBaseInfo">
+        <id column="id" property="id"/>
+        <result column="foodName" property="foodName"/>
+        <result column="price" property="price"/>
+        <result column="count" property="count"/>
+    </resultMap>
+    <select id="selectAllFoodByStoreId" resultMap="foodMapByStoreId">
+        select *
+        from food_base_info f
+        where f.id in (select foodId from store_food where storeId=#{storeId})
+    </select>
+
+
 </mapper>

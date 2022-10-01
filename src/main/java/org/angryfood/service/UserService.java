@@ -22,6 +22,8 @@ public interface UserService
     ServiceResponse<Boolean> insertStore(StoreBaseInfo store);
     ServiceResponse<Boolean> insertFood(long storeId, FoodBaseInfo food);
     ServiceResponse<Boolean> updateCombo(long storeId,ComboBaseInfo combo);
+    ServiceResponse<ArrayList<FoodBaseInfo>> selectAllFoodByStoreId(long storeId);
+
 
 
 }

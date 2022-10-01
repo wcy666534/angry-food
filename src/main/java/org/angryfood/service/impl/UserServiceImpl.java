@@ -160,5 +160,9 @@ public class UserServiceImpl implements UserService {
             return ServiceResponse.buildErrorResponse(10,"updateCombo");
         }
     }
+    public ServiceResponse<ArrayList<FoodBaseInfo>> selectAllFoodByStoreId(long storeId){
+        return ServiceResponse.buildSuccessResponse(userBaseInfoMapper.selectAllFoodByStoreId(storeId));
+    }
+
 
 }

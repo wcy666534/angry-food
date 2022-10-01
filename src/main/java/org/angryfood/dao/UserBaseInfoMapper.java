@@ -29,4 +29,6 @@ public interface UserBaseInfoMapper
     int insertStore(StoreBaseInfo store);
     int insertFood(long storeId,FoodBaseInfo food);
     int updateCombo(long storeId,ComboBaseInfo combo);
+    ArrayList<FoodBaseInfo> selectAllFoodByStoreId(long storeId);
+
 }

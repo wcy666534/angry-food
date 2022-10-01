@@ -74,5 +74,10 @@ public class UserController {
     public ServiceResponse<Boolean>   updateCombo(long storeId, ComboBaseInfo combo){
         return userService.updateCombo(storeId,combo);
     }
+    @PostMapping("/selectAllFoodByStoreId")
+    public ServiceResponse<ArrayList<FoodBaseInfo>> selectAllFoodByStoreId(long storeId){
+        return userService.selectAllFoodByStoreId(storeId);
+    }
+  
 
 }
