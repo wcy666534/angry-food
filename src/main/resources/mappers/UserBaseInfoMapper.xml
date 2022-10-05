@@ -169,6 +169,17 @@ combo_food cf
                                  foodId)
         VALUES (#{storeId},#{foodId})
     </insert >
+
+
+    <insert id="insertComboFoods">
+        INSERT INTO combo_food ( comboId,
+                                 foodId)
+        VALUES
+        <foreach collection="list" separator="," item="item">
+            (#{item.storeId}, #{item.foodId})
+        </foreach>
+    </insert>
+
     <resultMap id="foodMapByStoreId" type="org.angryfood.domain.FoodBaseInfo">
         <id column="id" property="id"/>
         <result column="foodName" property="foodName"/>

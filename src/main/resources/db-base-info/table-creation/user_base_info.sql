@@ -13,3 +13,5 @@ CREATE TABLE `user_base_info`
     DEFAULT CHARSET = utf8mb4
     COLLATE utf8mb4_bin
     COMMENT 'Tracing of file uploading tasks.';
+
+-- 区分商家和客户，新建商家表，或者添加字段进行区分，一般推荐新建商家表

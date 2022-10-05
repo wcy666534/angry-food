@@ -61,6 +61,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public ServiceResponse<Boolean> update(UserBaseInfo userBaseInfo) {
+        // Update by id
+        // UPDATE user_base_info SET xxx = #{xxx}, ..., WHERE id = #{id}
+
         HashMap<String, Object> map = new HashMap<String, Object>();
         long id = userBaseInfoMapper.getIdByUsername(userBaseInfo.getUsername());
         map.put("id", id);

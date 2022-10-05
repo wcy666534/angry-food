@@ -7,3 +7,6 @@ CREATE TABLE `combo_food`
     CONSTRAINT `cid` FOREIGN KEY (`comboId`) REFERENCES `combo_base_info` (`id`),
     CONSTRAINT `combo_food_ibfk_1` FOREIGN KEY (`foodId`) REFERENCES `food_base_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='Tracing of file uploading tasks.'
+
+
+-- id, food_id, count
