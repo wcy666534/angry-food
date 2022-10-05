@@ -9,3 +9,5 @@ CREATE TABLE `food_base_info`
   AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_bin COMMENT ='Tracing of file uploading tasks.'
+
+-- id, name, type, weight

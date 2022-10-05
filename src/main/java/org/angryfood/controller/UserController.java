@@ -1,6 +1,8 @@
 package org.angryfood.controller;
 
 import org.angryfood.domain.*;
+import org.angryfood.models.InsertFoodParam;
+import org.angryfood.models.InsertOrderParam;
 import org.angryfood.models.ServiceResponse;
 import org.angryfood.models.UsernamePassword;
 import org.angryfood.service.UserService;
@@ -50,10 +52,11 @@ public class UserController {
     @GetMapping("/selectStoreByStoreId")
     public ServiceResponse<ArrayList<StoreBaseInfo>> selectStoreByStoreId() {
         //先用1代替吧
+        // SELECT id, name, ..., FROM store WHERE id = #{id}
         return userService.selectStoreByStoreId(1);
     }
     @PostMapping("/insertOrder")
-    public ServiceResponse<Boolean> insertOrder(@RequestBody long userId,long storeId,long comboId,long comboNumber){
+    public ServiceResponse<Boolean> insertOrder(@RequestBody InsertOrderParam insertOrderParam){
         return userService.insertOrder(userId, storeId,comboId,comboNumber);
     }
     @PostMapping("/insertComment")
@@ -65,7 +68,7 @@ public class UserController {
         return userService.insertStore(store);
     }
     @PostMapping("/insertFood")
-    public ServiceResponse<Boolean>   insertFood(long storeId, FoodBaseInfo food){
+    public ServiceResponse<Boolean>   insertFood(@RequestBody InsertFoodParam insertFoodParam){
         return userService.insertFood(storeId, food);
     }
     @PostMapping("/updateCombo")
@@ -79,6 +82,18 @@ public class UserController {
     @PostMapping("/insertAddress")
     public ServiceResponse<Boolean> insertAddress(AddressBaseInfo address){
         return userService.insertAddress(address);
+    }
+
+    @GetMapping("/x1/{p1}")
+    public String x1(@PathVariable("p1") int p1)
+    {
+        return "";
+    }
+
+    @GetMapping("/x2")
+    public String x2(@RequestParam("p2") int p2)
+    {
+        return "";
     }
 
     @PostMapping("/insertTakeAwayOrder")
