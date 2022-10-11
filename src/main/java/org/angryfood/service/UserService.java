@@ -2,7 +2,10 @@ package org.angryfood.service;
 
 import org.angryfood.domain.*;
 import org.angryfood.models.ServiceResponse;
+import org.angryfood.models.UpdateUserParam;
+import org.angryfood.models.UpdateUserPasswordParam;
 import org.angryfood.models.UsernamePassword;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,18 +14,8 @@ public interface UserService
 {
     ServiceResponse<Boolean> register(UserBaseInfo userBaseInfo);
     ServiceResponse<Long> login(UsernamePassword usernamePassword);
-    ServiceResponse<Boolean> update(UserBaseInfo userBaseInfo);
+    ServiceResponse<Boolean> update(UpdateUserParam updateUserParam);
+    ServiceResponse<Boolean> updateUserPassword(UpdateUserPasswordParam updateUserPasswordParam);
     ServiceResponse<Boolean> deleteUser(UserBaseInfo userBaseInfo);
-    ServiceResponse<ArrayList<String>> selectAllStore();
-    ServiceResponse<ArrayList<StoreBaseInfo>> selectStoreByStoreId(long storeId);
-    ServiceResponse<Boolean> insertOrder(long userId,long storeId,long comboId,long comboNumber);
-    ServiceResponse<Boolean> insertComment(long orderId,String comment);
-    ServiceResponse<Boolean> insertStore(StoreBaseInfo store);
-    ServiceResponse<Boolean> insertFood(long storeId, FoodBaseInfo food);
-    ServiceResponse<Boolean> updateCombo(long storeId,ComboBaseInfo combo);
-    ServiceResponse<ArrayList<FoodBaseInfo>> selectAllFoodByStoreId(long storeId);
-    ServiceResponse<Boolean> insertAddress(AddressBaseInfo address);
-    ServiceResponse<Boolean>  insertTakeAwayOrder(long id,long userId, long storeId, HashMap<Long, Integer> foodInformMap);
-
 
 }

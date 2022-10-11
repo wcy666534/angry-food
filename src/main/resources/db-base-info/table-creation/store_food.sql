@@ -1,8 +1,12 @@
 CREATE TABLE `store_food` (
-                              `storeId` bigint(10) NOT NULL,
-                              `foodId` bigint(10) NOT NULL,
-                              PRIMARY KEY (`storeId`,`foodId`),
-                              KEY `foodId` (`foodId`),
-                              CONSTRAINT `foodId` FOREIGN KEY (`foodId`) REFERENCES `food_base_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-                              CONSTRAINT `storeId` FOREIGN KEY (`storeId`) REFERENCES `store_base_info` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+                              `id`         bigint(10) AUTO_INCREMENT NOT NULL,
+                              `store_id`   bigint(10) NOT NULL,
+                              `food_id`    bigint(10) NOT NULL,
+                              `price` varchar(255) NOT NULL,
+                              `stock_count` DOUBLE NOT NULL,
+                              PRIMARY KEY (`id`)
+) ENGINE = INNODB
+    DEFAULT CHARSET = utf8mb4
+    COLLATE utf8mb4_bin
+    COMMENT 'Tracing of file uploading tasks.';
+-- id, store_id, food_id, price, stock_count

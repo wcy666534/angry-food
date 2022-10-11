@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.sql.Time;
 
 /**
  * @Author: 作者
@@ -16,8 +16,9 @@ import java.util.List;
 @Data
 public class StoreBaseInfo {
     private long id;
-    private String storeName;
-    private String storeClass;
-    private String storeAddress;
-    private List<ComboBaseInfo> comboList;
+    private String name;
+    private String address;
+    private String type;
+    private Time startOpeningHour;
+    private Time endOpeningHour;
 }

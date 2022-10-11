@@ -16,8 +16,9 @@ import java.util.List;
 @Data
 public class ComboBaseInfo {
     private long id;
-    private String comboName;
-    private Integer price;
-    private Integer count;
-    private List<FoodBaseInfo> foodList;
+    private String name;
+    private Double price;
+    private long storeId;
+
+//    -- id, name, price, store_id
 }

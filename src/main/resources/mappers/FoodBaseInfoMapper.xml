@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.angryfood.dao.FoodBaseInfoMapper">
+    <insert id="addFood">
+        INSERT INTO food_base_info
+        (name,
+         type,
+         weight)
+        VALUES (#{name},
+                #{type},
+                #{weight})
+    </insert>
+    <select id="getAllFoodByStoreId" resultType="org.angryfood.domain.FoodBaseInfo">
+        SELECT id,name,type,weight
+        FROM food_base_info
+        where id in(select food_id from store_food where store_id=#{id})
+    </select>
+</mapper>

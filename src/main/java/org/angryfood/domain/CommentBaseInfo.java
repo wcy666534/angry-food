@@ -8,17 +8,16 @@ import java.sql.Time;
 
 /**
  * @Author: 作者
- * @Date: 2022/09/30/19:09
+ * @Date: 2022/10/09/19:12
  * @Description: 致敬
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class OrderBaseInfo {
+public class CommentBaseInfo {
     private long id;
-    private long userId;
-    private long storeId;
-    private long addressId;
-    private double totalPrice;
-    private Time orderTime;
+    private long orderId;
+    private String comment;
+    private Time time;
+//    id,order_id,comment,time
 }

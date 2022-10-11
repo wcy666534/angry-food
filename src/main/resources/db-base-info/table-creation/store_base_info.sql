@@ -1,8 +1,14 @@
 CREATE TABLE `store_base_info`
 (
-    `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID.',
-    `storeName`    varchar(200) COLLATE utf8mb4_bin NOT NULL COMMENT 'store name.',
-    `storeClass`   varchar(200) COLLATE utf8mb4_bin NOT NULL COMMENT 'food type.',
-    `storeAddress` varchar(200) COLLATE utf8mb4_bin NOT NULL COMMENT 'address for store.',
+    `id` bigint(10) AUTO_INCREMENT NOT NULL,
+    `name` varchar(255) NOT NULL,
+    `type` varchar(255) NOT NULL,
+    `address` varchar(255) NOT NULL,
+    `start_opening_hour`  timestamp ,
+    `end_opening_hour`  timestamp ,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='Tracing of file uploading tasks.'
+) ENGINE = INNODB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE utf8mb4_bin
+    COMMENT 'Tracing of file uploading tasks.';
+-- id, name, type, address, start_opening_hour, end_opening_hour

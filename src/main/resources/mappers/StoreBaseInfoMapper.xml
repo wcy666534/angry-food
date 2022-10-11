@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.angryfood.dao.StoreBaseInfoMapper">
+    <insert id="addStore">
+        INSERT INTO store_base_info
+        (name,type,address)
+        VALUES (#{name},#{type},#{address})
+    </insert>
+    <select id="getAllStore" resultType="org.angryfood.domain.StoreBaseInfo">
+        SELECT id, name, address, type, start_opening_hour, end_opening_hour
+        FROM store_base_info
+    </select>
+    <select id="getStoreById" resultType="org.angryfood.domain.StoreBaseInfo">
+        SELECT id, name, address, type, start_opening_hour, end_opening_hour
+        FROM store_base_info
+        where id = #{id}
+    </select>
+
+</mapper>

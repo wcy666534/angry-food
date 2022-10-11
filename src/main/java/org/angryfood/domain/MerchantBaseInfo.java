@@ -4,21 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
-
 /**
  * @Author: 作者
- * @Date: 2022/09/30/19:09
+ * @Date: 2022/10/09/16:52
  * @Description: 致敬
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class OrderBaseInfo {
+public class MerchantBaseInfo {
     private long id;
-    private long userId;
-    private long storeId;
-    private long addressId;
-    private double totalPrice;
-    private Time orderTime;
+    private String name;
+    private String encryptedPassword;
+    private String nickname;
+    private String emailAddress;
+    private String phoneNumber;
 }

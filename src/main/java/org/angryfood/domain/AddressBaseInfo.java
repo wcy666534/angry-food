@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class AddressBaseInfo {
-    private long addressId;
-    private long userId;
+    private long id;
     private String address;
+    private String addressee;
+    private String phoneNumber;
+//    -- id, address, addressee, phone_number
 }

@@ -3,7 +3,7 @@
 <mapper namespace="org.angryfood.dao.UserBaseInfoMapper">
     <resultMap id="BaseResultMap" type="org.angryfood.domain.UserBaseInfo">
         <id column="id" property="id"/>
-        <result column="username" property="username"/>
+        <result column="username" property="name"/>
         <result column="encrypted_password" property="encryptedPassword"/>
         <result column="nickname" property="nickname"/>
         <result column="email_address" property="emailAddress"/>
@@ -12,12 +12,12 @@
 
     <insert id="insertUser">
         INSERT INTO user_base_info
-        (username,
+        (name,
          encrypted_password,
          nickname,
          email_address,
          phone_number)
-        VALUES (#{username},
+        VALUES (#{name},
                 #{encryptedPassword},
                 #{nickname},
                 #{emailAddress},
@@ -27,205 +27,40 @@
     <select id="getUsernamePasswordMatchCount" resultType="int">
         SELECT COUNT(*)
         FROM user_base_info
-        WHERE username = #{username}
+        WHERE name = #{name}
           AND encrypted_password = #{password}
     </select>
 
     <select id="getIdByUsername" resultType="java.lang.Long">
         SELECT id
         FROM user_base_info
-        WHERE username = #{username}
+        WHERE name = #{name}
     </select>
+
     <update id="updateUser">
         update user_base_info
-        set username= #{username},
-            encrypted_password= #{encryptedPassword},
+        set name= #{name},
             nickname=#{nickname},
             email_address=#{emailAddress},
             phone_number=#{phoneNumber}
         where id = #{id}
     </update>
+
+    <select id="getPasswordById" resultType="java.lang.String">
+        select encrypted_password
+        from user_base_info
+        where id = #{id}
+    </select>
+    <update id="updateUserPassword">
+        update user_base_info
+        set encrypted_password= #{newEncryptedPassword}
+        where id = #{id}
+    </update>
+
     <delete id="deleteUser">
         delete
         from user_base_info
         where id = #{id}
     </delete>
-    <select id="selectAllStore" resultType="java.lang.String">
-        SELECT storeName
-        FROM store_base_info
-    </select>
-    <!--这个map存放的是最后查询到的最后结果-->
-    <resultMap id="storeMap" type="org.angryfood.domain.StoreBaseInfo">
-        <id column="sid" property="id" jdbcType="BIGINT"/>
-        <result column="storeName" property="storeName" jdbcType="VARCHAR"/>
-        <result column="storeClass" property="storeClass" jdbcType="VARCHAR"/>
-        <result column="storeAddress" property="storeAddress" jdbcType="VARCHAR"/>
-        <collection property="comboList" ofType="org.angryfood.domain.ComboBaseInfo" column="id"
-                    select="selectComboByStoreId"/>
-    </resultMap>
-    <!--这个Map存放的是通过商店ID查询到的套餐-->
-    <resultMap id="comboMap" type="org.angryfood.domain.ComboBaseInfo">
-        <id column="cid" property="id" jdbcType="INTEGER"/>
-        <result column="comboName" property="comboName" jdbcType="VARCHAR"/>
-        <result column="price" property="price" jdbcType="INTEGER"/>
-        <result column="count" property="count" jdbcType="INTEGER"/>
-        <collection property="foodList" ofType="org.angryfood.domain.FoodBaseInfo" column="id"
-                    select="selectFoodByStoreId"/>
-    </resultMap>
-    <resultMap id="foodMap" type="org.angryfood.domain.FoodBaseInfo">
-        <id column="fid" property="id" jdbcType="INTEGER"/>
-        <result column="foodName" property="foodName" jdbcType="VARCHAR"/>
-        <result column="price" property="price" jdbcType="INTEGER"/>
-        <result column="count" property="count" jdbcType="INTEGER"/>
-    </resultMap>
-    <select id="selectComboByStoreId" resultMap="comboMap">
-        select c.id, c.comboName, c.price, c.count
-        from store_combo sc
-                 left join combo_base_info c
-                           on (sc.comboId = c.id)
-        where sc.storeId = #{storeId}
-    </select>
-    <select id="selectFoodByStoreId" resultMap="foodMap">
-        select f.id, f.foodName, f.count, f.price
-        from /*store_combo sc
-                 left join combo_base_info c
-                           on sc.comboId = c.id*/
---                  left join
-combo_food cf
---                            on c.id = cf.foodId
-    left join food_base_info f
-              on cf.foodId = f.id
-        where comboId = #{cid}
-    </select>
-    <select id="selectStoreByStoreId" resultMap="storeMap">
-        select *
-        from store_base_info s
-        where s.id = #{storeId}
-    </select>
-    <insert id="insertOrder">
-        INSERT INTO order_base_info
-        (userId,
-         storeId,
-         comboId,
-         price,
-         orderTime,
-         comboNumber)
-        VALUES (#{userId},
-                #{storeId},
-                #{comboId},
-                (select price from combo_base_info c where c.id= #{comboId})*(#{comboNumber}),
-                #{orderTime},
-                #{comboNumber})
-    </insert>
-    <update id="updateComboCount">
-        update combo_base_info
-        set count= (select count from combo_base_info where id = #{id})-#{comboNumber}
-    </update>
-    <insert id="insertComment">
-        INSERT INTO comment_base_info
-        (orderId,
-         comment,
-         commentTime)
-        VALUES (#{orderId},
-                #{comment},
-                #{commentTime})
-    </insert>
-    <insert id="insertStore">
-        INSERT INTO store_base_info
-        ( storeName,
-         storeClass,
-         storeAddress)
-        VALUES (#{storeName},
-                #{storeClass},
-                #{storeAddress})
-    </insert>
-    <insert id="insertFood">
-        INSERT INTO food_base_info
-        ( foodName,
-          price,
-          count)
-        VALUES (#{foodName},
-                #{price},
-                #{count})
-    </insert>
-    <insert id="insertStore_food">
-        INSERT INTO store_food
-        (storeId,
-        foodId)
-        VALUES (#{storeId},(select id from food_base_info where foodName=#{foodName})
-    </insert>
-    <update id="updateCombo">
-        update combo_base_info
-        set comboName= #{comboName},
-            price= #{price},
-            count=#{count}
-        where id = #{id}
-    </update>
-    <delete id="deleteCombo_food">
-        delete  from combo_food  where comboId = #{id}
-    </delete>
-    <insert id="insertCombo_food">
-        INSERT INTO combo_food ( comboId,
-                                 foodId)
-        VALUES (#{storeId},#{foodId})
-    </insert >
-    <resultMap id="foodMapByStoreId" type="org.angryfood.domain.FoodBaseInfo">
-        <id column="id" property="id"/>
-        <result column="foodName" property="foodName"/>
-        <result column="price" property="price"/>
-        <result column="count" property="count"/>
-    </resultMap>
-    <select id="selectAllFoodByStoreId" resultMap="foodMapByStoreId">
-        select *
-        from food_base_info f
-        where f.id in (select foodId from store_food where storeId=#{storeId})
-    </select>
-    <insert id="insertAddress">
-        INSERT INTO address_base_info
-        ( addressId,
-          address,
-          userId)
-        VALUES (#{addressId},
-                #{address},
-                #{userId})
-    </insert >
-    <insert id="insertTakeAwayOrder">
-        INSERT INTO takeawayorder_base_info
-        ( id,
-          userId,
-          storeId,
-          address,
-          sumPrice,
-          orderTime)
-        VALUES (#{id},
-                #{userId},
-                #{storeId},
-                #{address},
-                #{sumPrice},
-                #{orderTime}
-                )
-    </insert>
-    <select id="getPriceByFoodId" resultType="java.lang.Integer">
-        SELECT price
-        FROM food_base_info
-        WHERE id = #{foodId}
-    </select>
-    <insert id="insertTakeAwayOrder_Food">
-        INSERT INTO takeawayorder_food
-        ( takeawayorderId,
-          foodId,
-          storeId,
-          foodNumber)
-        VALUES (#{takeawayorderId},
-                #{foodId},
-                #{storeId},
-                #{foodNumber}
-               )
-    </insert>
-    <update id="updateFood">
-        update food_base_info
-        set count= (select count from food_base_info where id=#{foodId})-#{foodNumber}
-        where id = #{foodId}
-    </update>
 
 </mapper>

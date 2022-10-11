@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class UsernamePassword
 {
-    private String username;
+    private String name;
     private String password;
 }
