@@ -18,10 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class AddressServiceImpl implements AddressService {
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private AddressBaseInfoMapper addressBaseInfoMapper;
     public ServiceResponse<Boolean> addAddress(AddressBaseInfo addressBaseInfo){
+        if (addressBaseInfo.getAddress() == null)
+            throw new IllegalArgumentException("address cannot be null.");
+
         try {
             int insertSuccessCount =addressBaseInfoMapper.addAddress(addressBaseInfo);
 

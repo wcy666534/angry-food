@@ -29,6 +29,7 @@ public class StoreController {
     public ServiceResponse<ArrayList<StoreBaseInfo>> getAllStore() {
         return storeService.getAllStore();
 
+        // 分页: pageIndex, pageSize => pageIndex, pageSize, data(ArrayList<StoreBaseInfo>)
     }
     @PostMapping("/getStoreById")
     public ServiceResponse<StoreBaseInfo> getStoreById(@RequestBody Id id) {
