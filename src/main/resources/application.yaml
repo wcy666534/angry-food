@@ -12,8 +12,10 @@ spring:
         druid:
             driver-class-name: com.mysql.cj.jdbc.Driver
             url: jdbc:mysql://localhost:3306/angry_food?useUnicode=true&characterEncoding=utf8
-            username: root
-            password: 123456
+#            username: root
+#            password: 123456
+            username: DinoStark
+            password: non-feeling
 
 mybatis:
     mapper-locations:

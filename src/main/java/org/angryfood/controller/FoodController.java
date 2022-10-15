@@ -30,5 +30,7 @@ public class FoodController {
     @PostMapping("/getAllFoodByStoreId")
     public ServiceResponse<ArrayList<FoodBaseInfo>> getAllFoodByStoreId(@RequestBody Id id){
         return foodService.getAllFoodByStoreId(id);
+
+        // 支持分页、食物类型
     }
 }

@@ -24,4 +24,8 @@ public class OrderController {
     public ServiceResponse<Boolean> addOrder(@RequestBody OrderBaseInfo orderBaseInfo){
         return orderService.addOrder(orderBaseInfo);
     }
+
+    // 支持分页和关键字的订单查询
+
+    // 订单删除, deleteById
 }
